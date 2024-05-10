@@ -1,30 +1,43 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
   <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
+    <!-- Binding dengan class dan style -->
+    <input type="text" class="text-input" :class="{ 'highlight': isHighlighted }" :style="{ 'font-weight': isBold ? 'bold' : 'normal' }" v-model="inputText">
+
+    <!-- Interaksi dinamis dengan event listeners -->
+    <button @click="toggleHighlight">Toggle Highlight</button>
+    <button @click="toggleBold">Toggle Bold</button>
   </div>
-  <HelloWorld msg="Vite + Vue" />
 </template>
 
+<script>
+export default {
+  data() {
+    return {
+      inputText: '',
+      isHighlighted: false,
+      isBold: false
+    };
+  },
+  methods: {
+    toggleHighlight() {
+      this.isHighlighted = !this.isHighlighted;
+    },
+    toggleBold() {
+      this.isBold = !this.isBold;
+    }
+  }
+};
+</script>
+
 <style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+.text-input {
+  width: 200px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 10px;
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
+.highlight {
+  background-color: yellow;
 }
 </style>
